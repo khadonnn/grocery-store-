@@ -13,7 +13,7 @@ const Hero = () => {
       />
 
       {/* Lớp phủ Gradient có chiều sâu (Đậm ở trái để nổi bật chữ, mờ dần sang phải) */}
-      <div className="absolute inset-0 bg-gradient-to-r from-app-green via-app-green/80 to-transparent z-1" />
+      <div className="absolute inset-0 bg-gradient-to-r from-app-green/95 via-app-green/70 to-transparent z-1" />
 
       {/* Nội dung chính */}
       <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 w-full z-10">
@@ -26,8 +26,8 @@ const Hero = () => {
 
           {/* Tiêu đề chính sử dụng Font Serif sang trọng */}
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.15] mb-5">
-            Fresh Groceries, <br />
-            Delivered <span className="text-app-orange">Fast</span>
+            <span className="text-app-orange">Fresh</span> Groceries, <br />
+            Delivered Fast
           </h1>
 
           {/* Đoạn mô tả ngắn gọn, dễ đọc */}
@@ -40,7 +40,7 @@ const Hero = () => {
             {/* Nút Primary */}
             <Link
               to="/products"
-              className="px-8 py-3.5 bg-app-orange text-white font-medium rounded-full hover:bg-app-orange-dark shadow-sm hover:shadow-md transition-all flex items-center gap-2 active:scale-[0.98]"
+              className="px-8 py-3.5 bg-orange-400 text-white font-medium rounded-full hover:bg-app-orange-dark shadow-sm hover:shadow-md transition-all flex items-center gap-2 active:scale-[0.98]"
             >
               Shop Now
               <ArrowRightIcon className="size-4" />

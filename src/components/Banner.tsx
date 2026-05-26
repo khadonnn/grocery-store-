@@ -33,7 +33,7 @@ const Banner = () => {
           <p className="font-medium text-emerald-50/95">
             Free shipping on orders over{" "}
             <span className="font-bold text-emerald-300 bg-emerald-400/10 px-1 py-0.5 rounded">
-              $15
+              $20
             </span>
           </p>
         </div>
