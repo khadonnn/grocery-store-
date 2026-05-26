@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { heroSectionData } from "../assets/assets";
 import {
+  Apple,
   BadgeCheck,
   BikeIcon,
   Eye,
   EyeOff,
+  FishSymbol,
   Leaf,
   Loader2Icon,
   LockIcon,
@@ -116,7 +118,7 @@ const Login = () => {
           {/* form */}
           <div className="text-center mb-8 ">
             <Link to="/" className="inline-flex items-center gap-2 mb-6">
-              <BikeIcon className="size-8 text-app-green" />
+              <FishSymbol className="size-8 text-app-green" />
               <span className="text-2xl font-semibold text-app-green">
                 Grocery Store
               </span>
