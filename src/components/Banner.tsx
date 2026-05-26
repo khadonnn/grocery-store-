@@ -18,7 +18,7 @@ const Banner = () => {
       {/* Hiệu ứng ánh sáng ngầm phía sau (Glow Effect) */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(52,211,153,0.15),transparent_45%)]" />
 
-      <div className="max-w-7xl mx-auto px-9 py-2.5 flex items-center justify-center relative z-10">
+      <div className="max-w-7xl mx-auto px-9 py-1 flex items-center justify-center relative z-10">
         {/* Nội dung chính */}
         <div className="flex items-center gap-2.5 tracking-wide">
           {/* Badge điểm nhấn */}
