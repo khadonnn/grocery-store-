@@ -50,21 +50,6 @@ const Navbar = () => {
 
         {/* 2. CỤM PHẢI: Gộp cả Search và Menu vào đây để chúng dính sát nhau */}
         <div className="flex flex-1 items-center justify-end gap-6 sm:gap-8">
-          {/* Ô Search bên trong cụm phải */}
-          <form
-            className="hidden sm:block relative w-full max-w-xs text-sm"
-            onSubmit={handleSearch}
-          >
-            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 size-4" />
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-app-orange focus:border-transparent transition"
-            />
-          </form>
-
           {/* Cụm Menu Links nằm sát ngay sau ô Search */}
           <div className="hidden md:flex items-center gap-6 text-sm text-zinc-600 shrink-0">
             <Link to="/" className="hover:text-zinc-900 transition-colors">
@@ -80,6 +65,21 @@ const Navbar = () => {
               Deals
             </Link>
           </div>
+          {/* Ô Search bên trong cụm phải */}
+          <form
+            className="hidden sm:block relative w-full max-w-xs text-sm"
+            onSubmit={handleSearch}
+          >
+            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 size-4" />
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-9 pr-3 py-2 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-app-orange focus:border-transparent transition"
+            />
+          </form>
+
           {/* right actions */}
           {/* right actions */}
           <div className="flex items-center gap-3">
