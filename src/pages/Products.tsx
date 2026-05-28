@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import type { Product } from "../types";
 import { categoriesData, dummyProducts } from "../assets/assets";
-import { ChevronDown, Home, SlidersHorizontal } from "lucide-react";
+import { ChevronDown, Home, SlidersHorizontal, XIcon } from "lucide-react";
 import ProductCard from "../components/ProductCard";
 import Loading from "../components/Loading";
+import FilterPanel from "../components/FilterPanel";
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -67,7 +68,16 @@ const Products = () => {
           {/* sidebar */}
           <aside className="hidden lg:block w-64 shrink-0">
             <div className="bg-white rounded-2xl p-4 sticky top-24">
-              <p>Filters</p>
+              <FilterPanel
+                categories={categoriesData}
+                category={category}
+                organic={organic}
+                minPrice={minPrice}
+                maxPrice={maxPrice}
+                updateFilters={updateFilters}
+                clearFilters={clearFilters}
+                hasFilters={hasFilters}
+              />
             </div>
           </aside>
           {/* main content */}
@@ -77,7 +87,9 @@ const Products = () => {
             <div className="flex items-center justify-between mb-6">
               <div className="text-2xl font-semibold text-app-green ">
                 <h1>{activeCategory ? activeCategory.name : "All products"}</h1>
-                <p>{products.length} products found</p>
+                <p className="text-app-text-light/70 text-sm font-semibold">
+                  {products.length} products found
+                </p>
               </div>
               <div className="flex flex-col lg:items-center gap-3">
                 {/* mobile filters */}
@@ -93,7 +105,7 @@ const Products = () => {
                   <select
                     value={sort}
                     onChange={(e) => updateFilters("sort", e.target.value)}
-                    className="appearance-none pl-3 pr-8 py-2 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-app-green focus:border-transparent transition"
+                    className="appearance-none pl-3 pr-8 py-2 border bg-white border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-app-green focus:border-transparent transition"
                   >
                     <option value="newest">Newest </option>
                     <option value="price-asc">Price: Low → High</option>
@@ -154,6 +166,41 @@ const Products = () => {
           </main>
         </div>
       </div>
+      {/* mobile filters */}
+      {mobileFiltersOpen && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/40 z-50 "
+            onClick={() => setMobileFiltersOpen(false)}
+          >
+            <div className="fixed bottom-0 left-0 right-0 bg-white z-50 rounded-t-2xl max-h-[80vh] overflow-y-auto animate-slide-in-up">
+              <div className="">
+                <h3 className="text-lg font-semibold text-app-green mb-3">
+                  Filters
+                </h3>
+                <button
+                  onClick={() => setMobileFiltersOpen(false)}
+                  className="p-2 hover:bg-app-cream rounded-lg"
+                >
+                  <XIcon className="size-5" />
+                </button>
+              </div>
+              <div className="p-4">
+                <FilterPanel
+                  categories={categoriesData}
+                  category={category}
+                  organic={organic}
+                  minPrice={minPrice}
+                  maxPrice={maxPrice}
+                  updateFilters={updateFilters}
+                  clearFilters={clearFilters}
+                  hasFilters={hasFilters}
+                />
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
