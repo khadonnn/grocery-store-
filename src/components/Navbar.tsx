@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
   const user: any = {
@@ -20,12 +21,9 @@ const Navbar = () => {
     email: "khadon@example.com",
     isAdmin: true,
   };
-  const { cartCount, setCartCount } = {
-    cartCount: 5,
-    setCartCount: (_data: number) => {},
-  };
+
   const [searchQuery, setSearchQuery] = useState("");
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  const { cartCount, setIsCartOpen } = useCart();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const navigate = useNavigate();
   const handleSearch = (e: React.SubmitEvent<HTMLFormElement>) => {

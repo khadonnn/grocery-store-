@@ -1,5 +1,6 @@
 import { appPromoBannerData, assets } from "../assets/assets";
-
+import { FaAppStoreIos } from "react-icons/fa";
+import { FaGooglePlay } from "react-icons/fa";
 const AppPromoBanner = () => {
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 my-14 bg-green-950 rounded-2xl">
@@ -13,11 +14,16 @@ const AppPromoBanner = () => {
             {appPromoBannerData.description}
           </p>
           <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-            <button className="bg-white text-green-950 hover:bg-green-200 font-medium py-2 px-4 rounded-full transition-colors">
-              App Store
+            {/* Nút App Store */}
+            <button className="bg-white text-green-950 hover:bg-green-200 font-medium py-2 px-5 rounded-full transition-colors flex items-center justify-center whitespace-nowrap">
+              <FaAppStoreIos className="mr-2 size-5 shrink-0" />
+              <span>App Store</span>
             </button>
-            <button className="bg-white text-green-950 hover:bg-green-200 font-medium py-2 px-4 rounded-full transition-colors">
-              Google Play
+
+            {/* Nút Google Play */}
+            <button className="bg-white text-green-950 hover:bg-green-200 font-medium py-2 px-5 rounded-full transition-colors flex items-center justify-center whitespace-nowrap">
+              <FaGooglePlay className="mr-2 size-5 shrink-0" />
+              <span>Google Play</span>
             </button>
           </div>
         </div>

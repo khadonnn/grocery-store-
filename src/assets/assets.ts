@@ -61,12 +61,12 @@ export const deliveryPartnerLoginImage =
 export const appPromoBannerData = {
   title: "Get fresh groceries in minutes",
   description:
-    "Download the Instacart app for exclusive deals, real-time tracking, and the freshest selection delivered right to your door.",
+    "Download the GroceryStore app for exclusive deals, real-time tracking, and the freshest selection delivered right to your door.",
 };
 
 export const footerData = {
   brand: {
-    name: "Instacart",
+    name: "GroceryStore ",
     description:
       "Bringing fresh, organic groceries straight from local farms to your doorstep. Nourish your home with Earth's finest.",
     socials: [
@@ -98,9 +98,9 @@ export const footerData = {
   ],
 
   contact: [
-    { icon: MapPinIcon, text: "123 Green Valley Rd, Portland" },
-    { icon: PhoneIcon, text: "+1 (111) 123-4567" },
-    { icon: MailIcon, text: "hello@example.com" },
+    { icon: MapPinIcon, text: "Ho Chi Minh City, Vietnam" },
+    { icon: PhoneIcon, text: "(+84) 123-4567-890" },
+    { icon: MailIcon, text: "khadondev@example.com" },
   ],
 
   bottom: {

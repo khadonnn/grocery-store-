@@ -13,7 +13,7 @@ const Hero = () => {
       />
 
       {/* Lớp phủ Gradient có chiều sâu (Đậm ở trái để nổi bật chữ, mờ dần sang phải) */}
-      <div className="absolute left-0 top-0 h-full w-3/5 bg-gradient-to-r from-black/45 via-black/15 to-transparent z-[1]" />
+      <div className="absolute left-0 top-0 h-full w-4/5 bg-gradient-to-r from-black/70 via-black/15 to-transparent z-10" />
 
       {/* Nội dung chính */}
       <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 w-full z-10">
