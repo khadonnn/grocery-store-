@@ -128,3 +128,21 @@ input:focus {
 .animate-pulse-soft {
   animation: pulse-soft 2s ease-in-out infinite;
 }
+@keyframes sparkle {
+  0% {
+    transform: scale(0.5) translateY(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5) translateY(-80px);
+    opacity: 0;
+  }
+}
+
+.animate-sparkle {
+  animation: sparkle 3.5s linear infinite;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+}
