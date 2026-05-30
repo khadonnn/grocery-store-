@@ -97,9 +97,10 @@ export const footerData = {
     },
   ],
 
+  // ĐÃ ĐỔI: Cập nhật địa điểm Việt Nam chân thực hơn ở Footer
   contact: [
-    { icon: MapPinIcon, text: "Ho Chi Minh City, Vietnam" },
-    { icon: PhoneIcon, text: "(+84) 123-4567-890" },
+    { icon: MapPinIcon, text: "District 1, Ho Chi Minh City, Vietnam" },
+    { icon: PhoneIcon, text: "(+84) 28 3829 1234" },
     { icon: MailIcon, text: "khadondev@example.com" },
   ],
 
@@ -686,18 +687,19 @@ export const dummyAdminDashboardData = {
   totalPartners: 2,
   recentOrders: [
     {
+      // ĐÃ ĐỔI: Bản địa hóa thông tin đơn hàng quản trị về Việt Nam
       shippingAddress: {
         label: "Home",
-        address: "New Market Road ",
-        city: "New York ",
-        state: "NY",
-        zip: "876543",
-        lat: 40.7128,
-        lng: -74.006,
+        address: "72 Lê Thánh Tôn",
+        city: "Ho Chi Minh City",
+        state: "Vietnam",
+        zip: "700000",
+        lat: 10.7781,
+        lng: 106.7019,
       },
       liveLocation: {
-        lat: 40.7128,
-        lng: -74.006,
+        lat: 10.7781,
+        lng: 106.7019,
         updatedAt: "2026-04-06T08:41:27.211Z",
       },
       _id: "69d366617ed7e54198d67dac",
@@ -809,18 +811,19 @@ export const dummyDeliveryPartnerData = [
 
 export const dummyDashboardOrdersData = [
   {
+    // ĐÃ ĐỔI: Bản địa hóa đơn hàng 1 của khách hàng về TP.HCM (Quận 1)
     shippingAddress: {
       label: "Home",
-      address: "New Market Road ",
-      city: "New York ",
-      state: "NY",
-      zip: "876543",
-      lat: 40.7128,
-      lng: -74.006,
+      address: "25 Nguyễn Huệ",
+      city: "Ho Chi Minh City",
+      state: "Vietnam",
+      zip: "700000",
+      lat: 10.7769,
+      lng: 106.7009,
     },
     liveLocation: {
-      lat: 40.7128,
-      lng: -74.006,
+      lat: 10.7769,
+      lng: 106.7009,
       updatedAt: "2026-04-06T08:41:27.211Z",
     },
     _id: "69d366617ed7e54198d67dac",
@@ -902,18 +905,19 @@ export const dummyDashboardOrdersData = [
     __v: 4,
   },
   {
+    // ĐÃ ĐỔI: Bản địa hóa đơn hàng 2 của khách hàng về TP.HCM (Quận 1)
     shippingAddress: {
       label: "Home",
-      address: "New Market Road ",
-      city: "New York ",
-      state: "NY",
-      zip: "876543",
-      lat: 40.7128,
-      lng: -74.006,
+      address: "25 Nguyễn Huệ",
+      city: "Ho Chi Minh City",
+      state: "Vietnam",
+      zip: "700000",
+      lat: 10.7769,
+      lng: 106.7009,
     },
     liveLocation: {
-      lat: 40.7128,
-      lng: -74.006,
+      lat: 10.7769,
+      lng: 106.7009,
       updatedAt: "2026-04-06T08:41:27.211Z",
     },
     _id: "69d366617ed7e54198d67dad",
@@ -999,24 +1003,24 @@ export const dummyCartData = [
 export const dummyAddressData = [
   {
     label: "Home",
-    address: "123 Main St ",
-    city: "New York ",
-    state: "NY",
-    zip: "10001",
+    address: "25 Nguyễn Huệ",
+    city: "Ho Chi Minh City",
+    state: "Vietnam",
+    zip: "700000",
     isDefault: true,
-    lat: 40.7128,
-    lng: -74.006,
+    lat: 10.7769,
+    lng: 106.7009,
     _id: "69d3652df9a340288f1a0f8c",
   },
   {
     label: "Work",
-    address: "456 Market St ",
-    city: "New York ",
-    state: "NY",
-    zip: "10002",
+    address: "12 Phố Huế",
+    city: "Hanoi",
+    state: "Vietnam",
+    zip: "100000",
     isDefault: false,
-    lat: 40.7128,
-    lng: -74.006,
+    lat: 21.0245,
+    lng: 105.8412,
     _id: "69d3652df9a340288f1a0f8d",
   },
 ];
