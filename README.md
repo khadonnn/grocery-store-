@@ -1,73 +1,177 @@
-# React + TypeScript + Vite
+# 🛒 Fresh Grocery Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern grocery e-commerce website built with React, TypeScript, Vite, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Customer Features
 
-## React Compiler
+- Browse products by category
+- Search products by name
+- Product details page
+- Shopping cart management
+- Address management
+- Checkout flow
+- Order history
+- Responsive design for mobile, tablet, and desktop
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### UI Features
 
-## Expanding the ESLint configuration
+- Modern grocery-themed design
+- Product filtering
+- Flash Deals section
+- Featured products
+- Category navigation
+- Loading states
+- Smooth animations
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Frontend
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- React
+- TypeScript
+- Vite
+- React Router
+- Tailwind CSS
+- Lucide React Icons
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### State Management
+
+- React Context APIs
+- React Hooks
+
+## 📁 Project Structure
+
+## 📁 Project Structure
+
+```text
+project-root/
+│
+├── client/                 # Frontend React Application
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── pages/
+│   │   ├── types/
+│   │   ├── hooks/
+│   │   ├── utils/
+│   │   ├── App.tsx
+│   │   └── main.tsx
+│   ├── package.json
+│   └── vite.config.ts
+│
+├── server/                 # Backend API
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── uploads/
+│   ├── server.js
+│   └── package.json
+│
+├── README.md
+└── .gitignore
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Installation
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Clone the repository:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone <your-repository-url>
 ```
+
+Navigate to the project:
+
+```bash
+cd fresh-grocery
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start development server:
+
+```bash
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Preview production build:
+
+```bash
+npm run preview
+```
+
+## 📸 Screenshots
+
+### Home Page
+
+- Hero Banner
+- Categories
+- Flash Deals
+- Featured Products
+
+### Product Page
+
+- Product Information
+- Add To Cart
+- Related Products
+
+### Cart
+
+- Quantity Management
+- Price Calculation
+- Checkout Navigation
+
+### Address Management
+
+- Add Address
+- Edit Address
+- Default Address Selection
+
+## 🎯 Learning Objectives
+
+This project demonstrates:
+
+- React Fundamentals
+- TypeScript Integration
+- Component Architecture
+- Context API
+- React Router
+- State Management
+- Responsive Design
+- E-commerce UI Development
+
+## 🌟 Future Improvements
+
+- Backend API Integration
+- User Authentication
+- Payment Gateway
+- Product Reviews
+- Wishlist
+- Order Tracking
+- Admin Dashboard
+- Real-time Notifications
+
+## 📄 License
+
+This project is for learning and educational purposes.
+
+## 👨‍💻 Author
+
+Created by Kha Don
+
+GitHub: https://github.com/your-username
