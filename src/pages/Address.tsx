@@ -6,7 +6,7 @@ import Loading from "../components/Loading";
 import AddressCard from "../components/AddressCard";
 import AddressForm from "../components/AddressForm";
 
-const Address = () => {
+const Addresses = () => {
   const [address, setAddress] = useState<Address[]>([]);
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -110,4 +110,4 @@ const Address = () => {
     </div>
   );
 };
-export default Address;
+export default Addresses;
