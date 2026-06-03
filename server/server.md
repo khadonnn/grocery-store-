@@ -14,3 +14,7 @@ npm install prisma tsx --save-dev
 
 import { PrismaClient } from './generated/prisma'
 import { PrismaClient } from "../generated/prisma/client.js";
+
+# deployy server de lay url vao app cua inngest them app URL/api/inngest
+
+https://grocery-store-server-murex.vercel.app/api/inngest
