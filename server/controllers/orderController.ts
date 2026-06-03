@@ -2,8 +2,8 @@
 // Post /api/orders
 
 import { Request, Response } from "express";
-import { prisma } from "../config/prisma";
-import { inngest } from "../inngest";
+import { prisma } from "../config/prisma.js";
+import { inngest } from "../inngest/index.js";
 
 export const createOrder = async (req: Request, res: Response) => {
   const { items, shippingAddress, paymentMethod } = req.body;

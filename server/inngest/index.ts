@@ -1,6 +1,6 @@
 import { Inngest } from "inngest";
-import { prisma } from "../config/prisma";
-import sendEmail from "../config/nodemailer";
+import { prisma } from "../config/prisma.js";
+import sendEmail from "../config/nodemailer.js";
 import type { InngestFunction } from "inngest";
 const LOW_STOCK_THRESHOLD = 10;
 // Create a client to send and receive events

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { prisma } from "../config/prisma";
+import { prisma } from "../config/prisma.js";
 
 // get /api/products/flash-deals
 export const getFlashDeals = async (req: Request, res: Response) => {

@@ -1,12 +1,12 @@
 import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
-import authRouter from "./routes/authRoutes";
-import productRouter from "./routes/productRoutes";
-import uploadRouter from "./routes/uploadRoutes";
-import orderRouter from "./routes/orderRoutes";
+import productRouter from "./routes/productRoutes.js";
+import uploadRouter from "./routes/uploadRoutes.js";
+import orderRouter from "./routes/orderRoutes.js";
 import { serve } from "inngest/express";
 import { inngest, functions } from "./inngest/index.js";
+import authRouter from "./routes/authRoutes.js";
 
 const app = express();
 
