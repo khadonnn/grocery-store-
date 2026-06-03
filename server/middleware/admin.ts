@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { prisma } from "../config/prisma";
+import { prisma } from "../config/prisma.js";
 
 const admin = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -25,12 +25,10 @@ const admin = async (req: Request, res: Response, next: NextFunction) => {
     }
   } catch (error) {
     console.log("Admin middleware error:", error);
-    return res
-      .status(500)
-      .json({
-        message: "Internal server error",
-        error: error instanceof Error ? error.message : "Unknown error",
-      });
+    return res.status(500).json({
+      message: "Internal server error",
+      error: error instanceof Error ? error.message : "Unknown error",
+    });
   }
 };
 
