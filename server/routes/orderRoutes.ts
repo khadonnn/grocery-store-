@@ -7,7 +7,7 @@ import {
   getOrderLocation,
   getUserOrders,
   updateOrderStatus,
-} from "../controllers/corderController";
+} from "../controllers/orderController";
 import admin from "../middleware/admin";
 
 const orderRouter = express.Router();

@@ -3,6 +3,7 @@
 
 import { Request, Response } from "express";
 import { prisma } from "../config/prisma";
+import { inngest } from "../inngest";
 
 export const createOrder = async (req: Request, res: Response) => {
   const { items, shippingAddress, paymentMethod } = req.body;
@@ -80,6 +81,16 @@ export const createOrder = async (req: Request, res: Response) => {
       data: { stock: { decrement: item.quantity } },
     });
   }
+  // send stock update event to inngest
+  for (const item of orderItems) {
+    await inngest.send({
+      name: "inventory/stock.updated",
+      data: {
+        productId: item.product,
+      },
+    });
+  }
+  await inngest.send({ name: "order/created", data: { orderId: order.id } });
 };
 
 // get user orders
