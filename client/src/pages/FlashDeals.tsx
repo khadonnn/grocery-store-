@@ -1,20 +1,31 @@
 import { useEffect, useState } from "react";
 import type { Product } from "../types";
-import { dummyProducts } from "../assets/assets";
 import Loading from "../components/Loading";
 import { Zap } from "lucide-react";
 import ProductCard from "../components/ProductCard";
+import api from "../config/api";
+import toast from "react-hot-toast";
 
 const FlashDeals = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    setProducts(dummyProducts.filter((p: Product) => p.stock > 0));
-
-    const timer = setTimeout(() => setLoading(false), 1000);
-    return () => clearTimeout(timer);
+    api
+      .get("/products/flash-deals")
+      .then((res) => {
+        setProducts(res.data.products);
+        setLoading(false);
+      })
+      .catch((error: any) => {
+        toast.error(
+          error.response?.data?.message ||
+            "Failed to fetch flash deals. Please try again.",
+        );
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   if (loading) return <Loading />;
@@ -91,7 +102,7 @@ const FlashDeals = () => {
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
               {products.map((product) => (
                 <div
-                  key={product._id}
+                  key={product.id}
                   className="transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_24px_-10px_rgba(0,0,0,0.08)] rounded-xl"
                 >
                   <ProductCard product={product} />

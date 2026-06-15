@@ -43,7 +43,7 @@ const App = () => {
           </Route>
         </Route>
         <Route path="/search" element={<div>Search</div>} />
-        <Route path="/search-results" element={<div>SearchResults</div>} />
+        <Route path="/search-results" element={<SearchResults />} />
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />

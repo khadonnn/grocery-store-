@@ -18,6 +18,7 @@ model User {
   orders    Order[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  isAdmin   Boolean   @default(false)
 }
 
 model Address {

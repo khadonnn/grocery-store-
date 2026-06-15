@@ -20,7 +20,7 @@ const OrderTracking = () => {
   } | null>(null);
 
   useEffect(() => {
-    setOrder(dummyDashboardOrdersData.find((o) => o._id === id) as any);
+    setOrder(dummyDashboardOrdersData.find((o) => o.id === id) as any);
     setLoading(false);
   }, [id, navigate]);
   if (loading) return <Loading />;
@@ -40,7 +40,7 @@ const OrderTracking = () => {
         <div className="flex items-center justify-between mb-8">
           <div className="">
             <h1 className="text-2xl font-semibold text-app-green">
-              Order #{order._id.slice(-8).toUpperCase()}
+              Order #{order.id.slice(-8).toUpperCase()}
             </h1>
             <p className="text-sm text-app-text-light mt-1">
               Placed on{" "}

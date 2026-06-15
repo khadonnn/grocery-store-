@@ -9,7 +9,7 @@ const Hero = () => {
       <img
         src={heroSectionData.hero_image}
         alt="Fresh organic groceries background"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover bg-gray-200 "
       />
 
       {/* Lớp phủ Gradient có chiều sâu (Đậm ở trái để nổi bật chữ, mờ dần sang phải) */}

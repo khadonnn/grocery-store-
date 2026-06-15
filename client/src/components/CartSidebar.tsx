@@ -71,7 +71,7 @@ const CartSidebar = () => {
             items.map((item) => (
               <div
                 className="flex gap-3 bg-app-cream/60 rounded-xl p-3"
-                key={item.product._id}
+                key={item.product.id}
               >
                 <img
                   className="size-16 rounded-lg object-cover shrink-0"
@@ -90,7 +90,7 @@ const CartSidebar = () => {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() =>
-                          updateQuantity(item.product._id, item.quantity - 1)
+                          updateQuantity(item.product.id, item.quantity - 1)
                         }
                         className="w-8 h-8 flex items-center justify-center rounded-full bg-app-cream text-app-green hover:bg-app-green hover:text-white transition-colors"
                       >
@@ -101,7 +101,7 @@ const CartSidebar = () => {
                       </span>
                       <button
                         onClick={() =>
-                          updateQuantity(item.product._id, item.quantity + 1)
+                          updateQuantity(item.product.id, item.quantity + 1)
                         }
                         className="w-8 h-8 flex items-center justify-center rounded-full bg-app-cream text-app-green hover:bg-app-green hover:text-white transition-colors"
                       >
@@ -114,7 +114,7 @@ const CartSidebar = () => {
                         {(item.product.price * item.quantity).toFixed(2)}
                       </span>
                       <button
-                        onClick={() => removeFromCart(item.product._id)}
+                        onClick={() => removeFromCart(item.product.id)}
                         className="text-gray-400 hover:text-red-500 transition-colors p-1"
                       >
                         <Trash2Icon className="w-4 h-4" />

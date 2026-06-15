@@ -14,13 +14,15 @@ import {
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-  const user: any = {
-    name: "Kha don",
-    email: "khadon@example.com",
-    isAdmin: true,
-  };
+  // const user: any = {
+  //   name: "Kha don",
+  //   email: "khadon@example.com",
+  //   isAdmin: true,
+  // };
+  const { user, logout } = useAuth();
 
   const [searchQuery, setSearchQuery] = useState("");
   const { cartCount, setIsCartOpen } = useCart();
@@ -34,6 +36,7 @@ const Navbar = () => {
     }
   };
   const handleLogout = () => {
+    logout();
     setUserMenuOpen(false);
     navigate("/login");
   };
@@ -107,7 +110,7 @@ const Navbar = () => {
                     onClick={() => setUserMenuOpen(!userMenuOpen)}
                   >
                     <div className="size-7 rounded-full bg-green-950 text-white flex items-center justify-center font-medium text-sm">
-                      {user.name.charAt(0)}
+                      {user.name.charAt(0).toUpperCase()}
                     </div>
                     <ChevronDown className="size-4 text-zinc-600 hidden md:block" />
                   </button>
@@ -173,7 +176,7 @@ const Navbar = () => {
                     )}
                     {user && (
                       <Link
-                        to="/address"
+                        to="/addresses"
                         className="dropdown-link"
                         onClick={() => setUserMenuOpen(false)}
                       >
@@ -184,14 +187,14 @@ const Navbar = () => {
                     {/* Các điều hướng chỉ hiển thị trên Mobile */}
                     <Link
                       to="/products"
-                      className="dropdown-link md:hidden"
+                      className="dropdown-link "
                       onClick={() => setUserMenuOpen(false)}
                     >
                       <ArrowUpRightIcon size={16} /> Products
                     </Link>
                     <Link
                       to="/deals"
-                      className="dropdown-link md:hidden"
+                      className="dropdown-link "
                       onClick={() => setUserMenuOpen(false)}
                     >
                       <ArrowUpRightIcon size={16} /> Deals

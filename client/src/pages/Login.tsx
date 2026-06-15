@@ -17,6 +17,8 @@ import {
   Zap,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [isLoginState, setIsLoginState] = useState(true);
@@ -25,12 +27,24 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const { login, register } = useAuth();
   const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      window.location.href = "/";
-    }, 2000);
+    try {
+      if (isLoginState) {
+        await login(email, password);
+      } else {
+        await register(name, email, password);
+      }
+    } catch (error) {
+      toast.error(
+        "Authentication failed. Please check your credentials and try again.",
+      );
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="min-h-screen flex">
@@ -141,7 +155,7 @@ const Login = () => {
 
           {/* Login Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
-            {isLoginState && (
+            {!isLoginState && (
               <label className="text-sm flex flex-col gap-2">
                 <span>Name</span>
                 <div className="relative">
