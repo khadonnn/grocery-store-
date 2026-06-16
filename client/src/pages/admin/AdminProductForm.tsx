@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "lucide-react";
 import { categoriesData, dummyProducts } from "../../assets/assets";
 import Loading from "../../components/Loading";
+import api from "../../config/api";
+import toast from "react-hot-toast";
 
 export default function AdminProductForm() {
   const { id } = useParams();
   const isEdit = Boolean(id);
 
+  const navigation = useNavigate();
   const [loading, setLoading] = useState(isEdit);
   const [saving, setSaving] = useState(false);
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -26,16 +29,71 @@ export default function AdminProductForm() {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (isEdit) {
-        setFormData(() => dummyProducts.find((p) => p.id === id) as any);
+      try {
+        if (isEdit) {
+          const { data: prodData } = await api.get(`/products/${id}`);
+          const p = prodData.product;
+          setFormData({
+            name: p.name,
+            description: p.description,
+            price: p.price.toString(),
+            originalPrice: p.originalPrice ? p.originalPrice.toString() : "",
+            image: p.image,
+            category: p.category,
+            unit: p.unit,
+            stock: p.stock.toString(),
+            isOrganic: p.isOrganic,
+          });
+        }
+      } catch (error: any) {
+        toast.error(
+          error.response?.data?.message || "Failed to fetch product data.",
+        );
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     fetchData();
   }, [id, isEdit]);
 
   const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
+    setSaving(true);
+    try {
+      let finalImageUrl = formData.image;
+      if (imageFile) {
+        const formDataUpload = new FormData();
+        formDataUpload.append("image", imageFile);
+        const { data } = await api.post("/upload", formDataUpload);
+        finalImageUrl = data.url;
+      }
+      if (!finalImageUrl) {
+        toast.error("Image is required.");
+        setSaving(false);
+        return;
+      }
+      const payload = {
+        ...formData,
+        price: Number(formData.price),
+        originalPrice: formData.originalPrice
+          ? Number(formData.originalPrice)
+          : undefined,
+        stock: Number(formData.stock),
+        image: finalImageUrl,
+      };
+      if (isEdit) {
+        await api.put(`/products/${id}`, payload);
+        toast.success("Product updated successfully!");
+      } else {
+        await api.post("/products", payload);
+        toast.success("Product created successfully!");
+      }
+      navigation("/admin/products");
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || "Failed to save product.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (

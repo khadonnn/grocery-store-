@@ -111,5 +111,5 @@ export const deleteAddress = async (req: Request, res: Response) => {
     where: { userId: req.user!.id },
     orderBy: { createdAt: "asc" },
   });
-  res.json({ addresses });
+  res.status(201).json({ addresses });
 };
