@@ -8,7 +8,6 @@ import {
   ChevronRightIcon,
   CreditCardIcon,
   MapPinIcon,
-  MapPinOffIcon,
 } from "lucide-react";
 import CheckoutAddress from "../components/Checkout/CheckoutAddress";
 import CheckoutPayment from "../components/Checkout/CheckoutPayment";

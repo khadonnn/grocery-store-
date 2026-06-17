@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { heroSectionData } from "../assets/assets";
 import {
-  Apple,
-  BadgeCheck,
-  BikeIcon,
   Eye,
   EyeOff,
   FishSymbol,
@@ -11,8 +8,6 @@ import {
   Loader2Icon,
   LockIcon,
   MailIcon,
-  ShieldCheck,
-  ShoppingBag,
   UserIcon,
   Zap,
 } from "lucide-react";

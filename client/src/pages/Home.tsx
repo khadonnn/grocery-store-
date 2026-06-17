@@ -1,5 +1,5 @@
 import AppPromoBanner from "../components/AppPromoBanner";
-import CartSidebar from "../components/CartSidebar";
+// import CartSidebar from "../components/CartSidebar";
 import Features from "../components/Home/Features";
 import Hero from "../components/Home/Hero";
 import HomeCategories from "../components/Home/HomeCategories";
