@@ -1,12 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PackageIcon, NavigationIcon } from "lucide-react";
 import OtpModal from "../../components/Delivery/OtpModal";
 import CancelModal from "../../components/Delivery/CancelModal";
 import DeliveryOrderCard from "../../components/Delivery/DeliveryOrderCard";
 import Loading from "../../components/Loading";
 import type { Order } from "../../types";
-import { dummyDashboardOrdersData } from "../../assets/assets";
+import axios from "axios";
+import toast from "react-hot-toast";
 
+const API_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+
+const getAuthHeaders = () => ({
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("delivery_token")}`,
+  },
+});
 export default function DeliveryDashboard() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
@@ -21,39 +30,135 @@ export default function DeliveryDashboard() {
   // Cancel modal
   const [cancelModal, setCancelModal] = useState<string | null>(null);
   const [cancelReason, setCancelReason] = useState("");
-
+  const watchIdRef = useRef<number | null>(null);
   const fetchOrders = async () => {
     setLoading(true);
-    setOrders(dummyDashboardOrdersData as any);
-    setLoading(false);
+    try {
+      const { data } = await axios.get(
+        `${API_URL}/delivery/my-deliveries?status=${tab}`,
+        getAuthHeaders(),
+      );
+      setOrders(data.orders);
+    } catch (error: any) {
+      toast.error(
+        error?.response?.data?.message || "Error fetching deliveries",
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     fetchOrders();
   }, [tab]);
 
+  // send location every 10s for ative deliveries
+  useEffect(() => {
+    const activeOrders = orders.filter((o) =>
+      ["Assigned", "Packed", " Out for Delivery"].includes(o.status),
+    );
+
+    if (activeOrders.length === 0 || !tracking) {
+      if (watchIdRef.current !== null) {
+        navigator.geolocation.clearWatch(watchIdRef.current);
+        watchIdRef.current = null;
+      }
+      return;
+    }
+    const sendLocation = (position: GeolocationPosition) => {
+      const { latitude: lat, longitude: lng } = position.coords;
+      activeOrders.forEach(async (order) => {
+        try {
+          await axios.put(
+            `${API_URL}/delivery/my-deliveries/${order.id}/location`,
+            { lat, lng },
+            getAuthHeaders(),
+          );
+        } catch (error) {
+          console.error("Error sending location:", error);
+        }
+      });
+    };
+    watchIdRef.current = navigator.geolocation.watchPosition(
+      sendLocation,
+      () => {},
+      {
+        enableHighAccuracy: true,
+        maximumAge: 10000,
+      },
+    );
+    // updates every 10s
+    const interval = setInterval(() => {
+      navigator.geolocation.getCurrentPosition(sendLocation, () => {}, {
+        enableHighAccuracy: true,
+        maximumAge: 10000,
+      });
+    }, 10000);
+    return () => {
+      if (watchIdRef.current !== null) {
+        navigator.geolocation.clearWatch(watchIdRef.current);
+        watchIdRef.current = null;
+      }
+      clearInterval(interval);
+    };
+  }, [orders, tracking]);
   const handleUpdateStatus = async (orderId: string, status: string) => {
-    console.log(orderId, status);
+    try {
+      await axios.put(
+        `${API_URL}/delivery/my-deliveries/${orderId}/status`,
+        { status },
+        getAuthHeaders(),
+      );
+
+      toast.success("Order status updated");
+      fetchOrders();
+    } catch (error: any) {
+      toast.error(
+        error?.response?.data?.message || "Error updating order status",
+      );
+    }
   };
 
   const handleComplete = async () => {
     if (!otpModal || !otp) return;
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+    try {
+      await axios.put(
+        `${API_URL}/delivery/my-deliveries/${otpModal}/complete`,
+        { otp },
+        getAuthHeaders(),
+      );
+      toast.success("Order marked as completed");
       setOtpModal(null);
       setOtp("");
-    }, 1000);
+      fetchOrders();
+    } catch (error: any) {
+      toast.error(
+        error?.response?.data?.message || "Error marking order as completed",
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleCancel = async () => {
     if (!cancelModal) return;
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+    try {
+      await axios.put(
+        `${API_URL}/delivery/my-deliveries/${cancelModal}/cancel`,
+        { reason: cancelReason },
+        getAuthHeaders(),
+      );
+      toast.success("Order cancelled");
       setCancelModal(null);
       setCancelReason("");
-    }, 1000);
+      fetchOrders();
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message || "Error cancelling order");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (

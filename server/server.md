@@ -10,6 +10,8 @@ npm install -D @types/nodemailer
 npm install @prisma/client @prisma/adapter-neon dotenv
 npm install prisma tsx --save-dev
 
+npm i stripe
+
 <!--prisma config  -->
 
 import { PrismaClient } from './generated/prisma'
