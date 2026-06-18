@@ -3,7 +3,7 @@ import { useCart } from "../context/CartContext";
 import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import type { Product } from "../types";
-// Đã sửa: Xóa PlusIcon bị trùng và thêm ShoppingCartIcon vào danh sách import
+import { useImageZoom } from "../hooks/useImageZoom";
 import {
   ArrowLeftIcon,
   HomeIcon,
@@ -30,6 +30,9 @@ const ProductPage = () => {
   const [localquantity, setLocalquantity] = useState(1);
 
   console.log(updateQuantity, removeFromCart);
+
+  const { zoomed, position, handleMouseMove, onMouseEnter, onMouseLeave } =
+    useImageZoom();
 
   useEffect(() => {
     setLoading(true);
@@ -123,11 +126,22 @@ const ProductPage = () => {
           <div className="grid md:grid-cols-2 gap-0">
             {/* Khối bên trái: Hình ảnh */}
             <div className="relative flex items-center justify-center p-8 md:p-12 max-h-90 md:min-h-120">
-              <img
-                className="object-contain max-h-90 w-auto"
-                src={product.image}
-                alt={product.name}
-              />
+              <div
+                className="overflow-hidden rounded-xl"
+                onMouseMove={handleMouseMove}
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="object-contain max-h-90 w-auto transition-transform duration-200"
+                  style={{
+                    transformOrigin: `${position.x}% ${position.y}%`,
+                    transform: zoomed ? "scale(2)" : "scale(1)",
+                  }}
+                />
+              </div>
               <div className="absolute top-5 left-5 flex flex-wrap gap-1.5">
                 {product.isOrganic && (
                   <span className="flex items-center gap-1 px-2.5 py-1 text-xs font-semibold bg-app-green text-white rounded-full">
