@@ -1,6 +1,30 @@
 # 🛒 Fresh Grocery Store
 
-A modern grocery e-commerce website built with React, TypeScript, Vite, and Tailwind CSS.
+A clean grocery e-commerce platform with a React client and a Node.js/Prisma server.
+
+Vietnamese version: [README.vi.md](README.vi.md)
+
+## ✨ Overview
+
+Fresh Grocery Store is a modern grocery shopping app with a responsive client app in `client/` and a backend API in `server/`. It supports browsing products, filtering, cart management, checkout, admin tools, and delivery workflows.
+
+## 🛠️ Tech Stack
+
+### Client
+
+- React + TypeScript
+- Vite
+- React Router
+- Tailwind CSS
+- React Context and hooks
+
+### Server
+
+- Node.js + TypeScript
+- Express
+- Prisma ORM
+- PostgreSQL database
+- Cloudinary, Nodemailer, and Inngest integrations
 
 ## ✨ Features
 
@@ -25,23 +49,31 @@ A modern grocery e-commerce website built with React, TypeScript, Vite, and Tail
 - Loading states
 - Smooth animations
 
-## 🛠️ Tech Stack
+## 📸 Screenshots
 
-### Frontend
+### Login
 
-- React
-- TypeScript
-- Vite
-- React Router
-- Tailwind CSS
-- Lucide React Icons
+![Login](demo/login.png)
 
-### State Management
+### Homepage
 
-- React Context APIs
-- React Hooks
+![Homepage](demo/homepage.png)
 
-## 📁 Project Structure
+### Content
+
+![Content](demo/content.png)
+
+### Detail
+
+![Detail](demo/detail.png)
+
+### Filter
+
+![Filter](demo/filter.png)
+
+### Dashboard
+
+![Dashboard](demo/dashboard.png)
 
 ## 📁 Project Structure
 
