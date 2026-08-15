@@ -51,29 +51,18 @@ Fresh Grocery Store is a modern grocery shopping app with a responsive client ap
 
 ## 📸 Screenshots
 
-### Login
-
-![Login](demo/login.png)
-
-### Homepage
-
-![Homepage](demo/homepage.png)
-
-### Content
-
-![Content](demo/content.png)
-
-### Detail
-
-![Detail](demo/detail.png)
-
-### Filter
-
-![Filter](demo/filter.png)
-
-### Dashboard
-
-![Dashboard](demo/dashboard.png)
+<table>
+  <tr>
+    <td align="center"><strong>Login</strong><br/><img src="demo/login.png" width="100%"/></td>
+    <td align="center"><strong>Homepage</strong><br/><img src="demo/homepage.png" width="100%"/></td>
+    <td align="center"><strong>Content</strong><br/><img src="demo/content.png" width="100%"/></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Detail</strong><br/><img src="demo/detail.png" width="100%"/></td>
+    <td align="center"><strong>Filter</strong><br/><img src="demo/filter.png" width="100%"/></td>
+    <td align="center"><strong>Dashboard</strong><br/><img src="demo/dashboard.png" width="100%"/></td>
+  </tr>
+</table>
 
 ## 📁 Project Structure
 
