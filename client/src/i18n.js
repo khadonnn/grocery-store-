@@ -267,11 +267,24 @@ i18n
     },
   });
 
+// Đồng bộ thuộc tính lang của <html> để CSS chọn đúng font cho từng ngôn ngữ:
+// tiếng Anh -> Outfit, tiếng Việt -> Inter.
+const syncHtmlLanguage = () => {
+  if (typeof document === "undefined") return;
+  const isVietnamese = i18n.language?.toLowerCase().startsWith("vi");
+  document.documentElement.lang = isVietnamese ? "vi" : "en";
+};
+
 // Persist the selected language so switching survives page reloads.
 i18n.on("languageChanged", (lng) => {
   if (typeof window !== "undefined") {
     window.localStorage.setItem(STORAGE_KEY, lng);
   }
+  syncHtmlLanguage();
 });
+
+// Đảm bảo áp dụng đúng font ngay trên lần tải đầu tiên (event init có thể chạy
+// trước khi listener phía trên được đăng ký).
+syncHtmlLanguage();
 
 export default i18n;
