@@ -1,7 +1,9 @@
 import {
   ArrowUpRightIcon,
+  Check,
   ChevronDown,
   FishSymbol,
+  Languages,
   LogOut,
   MapPinIcon,
   MenuIcon,
@@ -12,9 +14,16 @@ import {
   XIcon,
 } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
+
+// Các ngôn ngữ có sẵn cho dropdown chuyển ngôn ngữ
+const LANGUAGE_OPTIONS = [
+  { code: "en", label: "English", flag: "\u{1F1EC}\u{1F1E7}" },
+  { code: "vi", label: "Tiếng Việt", flag: "\u{1F1FB}\u{1F1F3}" },
+] as const;
 
 const Navbar = () => {
   // const user: any = {
@@ -23,10 +32,12 @@ const Navbar = () => {
   //   isAdmin: true,
   // };
   const { user, logout } = useAuth();
+  const { t, i18n } = useTranslation();
 
   const [searchQuery, setSearchQuery] = useState("");
   const { cartCount, setIsCartOpen } = useCart();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
   const navigate = useNavigate();
   const handleSearch = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,6 +50,14 @@ const Navbar = () => {
     logout();
     setUserMenuOpen(false);
     navigate("/login");
+  };
+  // Ngôn ngữ hiện tại (xử lý cả trường hợp "en-US", "vi-VN")
+  const currentLang = i18n.language?.toLowerCase().startsWith("vi")
+    ? "vi"
+    : "en";
+  const handleLanguageChange = (lng: string) => {
+    i18n.changeLanguage(lng);
+    setLangMenuOpen(false);
   };
   return (
     <nav className="bg-white sticky top-0 z-50 border-b border-app-border">
@@ -56,16 +75,16 @@ const Navbar = () => {
           {/* Cụm Menu Links nằm sát ngay sau ô Search */}
           <div className="hidden md:flex items-center gap-6 text-sm text-zinc-600 shrink-0">
             <Link to="/" className="hover:text-zinc-900 transition-colors">
-              Home
+              {t("navbar.home")}
             </Link>
             <Link
               to="/products"
               className="hover:text-zinc-900 transition-colors"
             >
-              Products
+              {t("navbar.products")}
             </Link>
             <Link to="/deals" className="text-app-orange font-medium">
-              Deals
+              {t("navbar.deals")}
             </Link>
           </div>
           {/* Ô Search bên trong cụm phải */}
@@ -76,7 +95,7 @@ const Navbar = () => {
             <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 size-4" />
             <input
               type="text"
-              placeholder="Search products..."
+              placeholder={t("navbar.searchPlaceholder")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-9 pr-3 py-2 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-app-orange focus:border-transparent transition"
@@ -86,11 +105,57 @@ const Navbar = () => {
           {/* right actions */}
           {/* right actions */}
           <div className="flex items-center gap-3">
+            {/* Nút chuyển ngôn ngữ (EN / VI) */}
+            <div className="relative">
+              <button
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-zinc-200 text-sm font-medium text-zinc-700 hover:bg-zinc-50 transition-colors focus:outline-none"
+                onClick={() => setLangMenuOpen((prev) => !prev)}
+                aria-label={t("navbar.language")}
+              >
+                <Languages className="size-4 text-zinc-500" />
+                <span className="text-xs font-semibold uppercase text-zinc-700">
+                  {currentLang}
+                </span>
+                <ChevronDown className="size-3.5 text-zinc-400" />
+              </button>
+
+              {langMenuOpen && (
+                <>
+                  {/* Lớp overlay trong suốt bấm ra ngoài để tự đóng */}
+                  <div
+                    className="fixed inset-0 z-40 bg-transparent"
+                    onClick={() => setLangMenuOpen(false)}
+                  />
+
+                  {/* Dropdown chọn ngôn ngữ */}
+                  <div className="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-lg border border-app-border py-1 z-50 animate-fade-in">
+                    {LANGUAGE_OPTIONS.map((option) => (
+                      <button
+                        key={option.code}
+                        onClick={() => handleLanguageChange(option.code)}
+                        className={`flex items-center gap-2.5 w-full px-4 py-2.5 text-sm transition-colors ${
+                          currentLang === option.code
+                            ? "text-app-green font-semibold"
+                            : "text-zinc-700 hover:bg-app-cream/60"
+                        }`}
+                      >
+                        <span className="text-base leading-none">{option.flag}</span>
+                        <span className="flex-1 text-left">{option.label}</span>
+                        {currentLang === option.code && (
+                          <Check className="size-4" />
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+
             {/* Thẻ Giỏ hàng */}
             <button
               className="relative p-2 rounded-xl"
               onClick={() => setIsCartOpen(true)}
-              aria-label="View cart"
+              aria-label={t("navbar.viewCart")}
             >
               <ShoppingCart className="size-5 text-zinc-600" />
               {cartCount > 0 && (
@@ -120,7 +185,7 @@ const Navbar = () => {
                     to="/login"
                     className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-green-900 rounded-full hover:bg-green-950 transition-colors"
                   >
-                    <UserIcon size={16} /> Sign In
+                    <UserIcon size={16} /> {t("navbar.signIn")}
                   </Link>
                 )}
 
@@ -162,7 +227,7 @@ const Navbar = () => {
                         className="dropdown-link"
                         onClick={() => setUserMenuOpen(false)}
                       >
-                        <UserIcon size={16} /> Sign In
+                        <UserIcon size={16} /> {t("navbar.signIn")}
                       </Link>
                     )}
                     {user && (
@@ -171,7 +236,7 @@ const Navbar = () => {
                         className="dropdown-link"
                         onClick={() => setUserMenuOpen(false)}
                       >
-                        <UserIcon size={16} /> My Orders
+                        <UserIcon size={16} /> {t("navbar.myOrders")}
                       </Link>
                     )}
                     {user && (
@@ -180,7 +245,7 @@ const Navbar = () => {
                         className="dropdown-link"
                         onClick={() => setUserMenuOpen(false)}
                       >
-                        <MapPinIcon size={16} /> My Address
+                        <MapPinIcon size={16} /> {t("navbar.myAddress")}
                       </Link>
                     )}
 
@@ -190,14 +255,14 @@ const Navbar = () => {
                       className="dropdown-link "
                       onClick={() => setUserMenuOpen(false)}
                     >
-                      <ArrowUpRightIcon size={16} /> Products
+                      <ArrowUpRightIcon size={16} /> {t("navbar.products")}
                     </Link>
                     <Link
                       to="/deals"
                       className="dropdown-link "
                       onClick={() => setUserMenuOpen(false)}
                     >
-                      <ArrowUpRightIcon size={16} /> Deals
+                      <ArrowUpRightIcon size={16} /> {t("navbar.deals")}
                     </Link>
 
                     {/* Quyền Admin */}
@@ -212,7 +277,7 @@ const Navbar = () => {
                           className="text-app-orange-dark"
                         />
                         <span className="text-app-orange-dark font-medium">
-                          Admin Panel
+                          {t("navbar.adminPanel")}
                         </span>
                       </Link>
                     )}
@@ -224,7 +289,7 @@ const Navbar = () => {
                           className="flex items-center gap-3 px-4 py-2 text-app-error hover:bg-red-50 w-full transition-colors text-sm font-medium"
                           onClick={handleLogout}
                         >
-                          <LogOut size={16} /> Log Out
+                          <LogOut size={16} /> {t("navbar.logOut")}
                         </button>
                       </div>
                     )}

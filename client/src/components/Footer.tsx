@@ -1,8 +1,37 @@
 import { FishSymbol } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { footerData } from "../assets/assets";
 
+// Keys theo đúng thứ tự footerData.sections trong assets.ts
+const FOOTER_SECTION_TITLE_KEYS: string[] = [
+  "footer.quickLinks.title",
+  "footer.customerService.title",
+];
+
+const FOOTER_SECTION_LINK_KEYS: string[][] = [
+  [
+    "footer.quickLinks.allProducts",
+    "footer.quickLinks.flashDeals",
+    "footer.quickLinks.trackOrder",
+    "footer.quickLinks.deliveryPartner",
+  ],
+  [
+    "footer.customerService.myAccount",
+    "footer.customerService.orderHistory",
+    "footer.customerService.addresses",
+    "footer.customerService.helpCenter",
+  ],
+];
+
+const FOOTER_BOTTOM_LINK_KEYS: string[] = [
+  "footer.bottom.privacyPolicy",
+  "footer.bottom.termsOfService",
+];
+
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-app-green text-app-cream py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,7 +44,7 @@ const Footer = () => {
               </span>
             </Link>
             <p className="text-app-cream text-sm mb-4">
-              {footerData.brand.description}
+              {t("footer.brand.description")}
             </p>
             <div className="flex gap-3">
               {footerData.brand.socials.map((social, index) => {
@@ -38,7 +67,7 @@ const Footer = () => {
           {footerData.sections.map((section, index) => (
             <div key={index} className="">
               <h3 className="text-lg font-semibold uppercase mb-4">
-                {section.title}
+                {t(FOOTER_SECTION_TITLE_KEYS[index])}
               </h3>
               <ul className="space-y-2">
                 {section.links.map((link, i) => (
@@ -51,7 +80,7 @@ const Footer = () => {
                         to={link.to}
                         className="text-sm text-white/70 hover:text-white"
                       >
-                        {link.label}
+                        {t(FOOTER_SECTION_LINK_KEYS[index][i])}
                       </Link>
                     ) : (
                       <a
@@ -60,7 +89,7 @@ const Footer = () => {
                         rel="noopener noreferrer"
                         className="text-sm text-white/70 hover:text-white"
                       >
-                        {link.label}
+                        {t(FOOTER_SECTION_LINK_KEYS[index][i])}
                       </a>
                     )}
                   </li>
@@ -71,7 +100,7 @@ const Footer = () => {
 
           {/* contact */}
           <div className="">
-            <h3 className="text-sm font-semibold uppercase mb-4">Contact Us</h3>
+            <h3 className="text-sm font-semibold uppercase mb-4">{t("footer.contact.title")}</h3>
             <ul className="space-y-2">
               {footerData.contact.map((item, i) => {
                 const ContactIcon = item.icon;
@@ -91,7 +120,7 @@ const Footer = () => {
         {/* bottom */}
         <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 w-full">
           <p className="text-center sm:text-left text-sm text-white/70">
-            {footerData.bottom.copyright}
+            {t("footer.bottom.copyright")}
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
@@ -103,7 +132,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="text-xs text-white/50 hover:text-white transition-colors whitespace-nowrap"
               >
-                {link.label}
+                {t(FOOTER_BOTTOM_LINK_KEYS[i])}
               </a>
             ))}
           </div>
